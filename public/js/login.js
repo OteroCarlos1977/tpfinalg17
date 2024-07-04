@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
 
-        try {
+        if (data.usuario === "admin") {
+            alert("Bienvenido administrador");
+            window.location.href = '../administrar.html';
+        } 
+        else if (data.usuario !== "admin") {
+            alert("Bienvenido usuario: " + data.usuario);
+            window.location.href = '../principal.html'
+        } else {
+            alert("Usuario o contraseña incorrectos");
+        }
+
+
+       /* try {
             const respuesta = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -40,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error al realizar la solicitud:', error);
                 alert("Hubo un error al realizar la solicitud");
             }
-            });
+            });*/
         
             
         
