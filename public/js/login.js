@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const dataForm = new FormData(login);
         const data = {
-            usuario: dataForm.get('usaurio'),
+            usuario: dataForm.get('usuario'),
             password: dataForm.get('password'),
             
         }
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert("Usuario o contraseña incorrectos");
         }
-
+    
 
        /* try {
             const respuesta = await fetch('/api/auth/login', {
@@ -51,10 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }   catch (error) {
                 console.error('Error al realizar la solicitud:', error);
                 alert("Hubo un error al realizar la solicitud");
-            }
-            });*/
+            }*/
+            });
         
             
-        
-});
-
+});      
