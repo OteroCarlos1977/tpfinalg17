@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TUS PELICULAS</title>
+
+    <link rel="stylesheet" href="../css/administrar.css" />
+    
+    <script src="https://kit.fontawesome.com/f7fb471b65.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap"
+      rel="stylesheet"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="navegacion">
+        <a class="anclaLogo" href="#">
+          <i class="fas fa-film" aria-hidden="true"></i>
+          <span>TUS PELICULAS</span>
+        </a>
+        <div class="titulo">
+          <h3>Administrar Usuarios y Peliculas</h3>
+        </div>
+        <ul class="listaNav">
+          <li class="listaItem">
+            <a class="linkNav cerrarSesion" href="../index.html">Cerrar Sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="contenedorBotones" id="contenedorBotones">
+        <button id="usuarios">Usuarios</button>
+        <button id="peliculas">Peliculas</button>
+      </div>
+     
+    </main>
+    <section class="usuarios" id="seccionUsuarios">
+      <div class="tituloTabla">
+        <h3>ADMINISTRAR USUARIOS</h3>
+      </div>
+      <div class="contenedorDatosTabla">
+        <div class="contenedorTabla">
+          <table id="tablaUsuarios">
+            <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Email</th>
+                  <th>Rol_Id</th>
+                  <th>Usuario</th>
+                  <th>Contraseña</th>
+                  
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="botonCrud">
+            <button id="btnAgregarUsu">Agregar</button>
+            <button id="btnEditarUsu">Editar</button>
+            <button id="btnEliminarUsu">Eliminar</button>
+            <button id="btnRegresarUsu">Volver</button>
+        </div>
+      </div>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="peliculas" id="seccionPeliculas">
+      <div class="tituloTabla">
+        <h3>ADMINISTRAR PELICULAS</h3>
+      </div>
+      <div class="contenedorDatosTabla">
+        <div class="contenedorTabla">
+          <table id="tablaPeliculas">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Fecha Estreno</th>
+                <th>Genero</th>
+               <!-- <th>Imagen</th>-->
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="botonesPeliculas">
+          <button id="btnAgregarPeli">Agregar</button>
+          <button id="btnEditarPeli">Editar</button>
+          <button id="btnEliminarPeli">Eliminar</button>
+          <button id="btnRegresarPeli">Volver</button>
+
+        </div>
+      </div>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionAgregarPelicula" id="seccionAgregarPelicula">
+        <h2 class="tituloForm">Agregar Pelicula</h2>
+        <span class="close-icon">&times;</span>
+      <form id="agregarPelicula" enctype="multipart/form-data">
+        
+        <div>
+          <input type="text" placeholder="Titulo" id="tituloAgreg" name="tituloAgreg" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="date" placeholder="Fecha Estreno" id="fechaEstrenoAgreg" name="fechaEstrenoAgreg"/>
+          <div class="error-text"></div>
+        </div>
+
+       <!-- <div>
+          <input type="file"  id="imagenAgreg" name="imagenAgreg" />
+          <div class="error-text"></div>
+        </div>-->
+        <div>
+          <select id="generoAgreg" name="generoAgreg"></select>
+
+<script>
+    
+      
+      document.addEventListener('DOMContentLoaded', async () => {
+        const API_REST = 'http://localhost:3000/api/'
+    try {
+        const respuesta = await fetch(API_REST + 'genero', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const jsonResponse = await respuesta.json();
+        
+
+        if (jsonResponse.body && Array.isArray(jsonResponse.body)) {
+            const generos = jsonResponse.body;
+            const selectGenero = document.getElementById('generoAgreg');
+
+            generos.forEach(genero => {
+                const option = document.createElement('option');
+                option.value = genero.id;  // Asume que el objeto genero tiene una propiedad 'id'
+                option.textContent = genero.genero;  // Asume que el objeto genero tiene una propiedad 'genero'
+                selectGenero.appendChild(option);
+            });
+        } else {
+            console.error('La respuesta de la API no contiene un array en la propiedad "body":', jsonResponse);
+        }
+    } catch (error) {
+        console.error('Error al obtener los géneros:', error);
+    }
+});
+</script>
+        </div>
+
+        <div>
+          <input class="boton" type="submit" value="Guardar" />
+        </div>
+      </form>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionActualizarPelicula" id="seccionActualizarPelicula">
+        <h2 class="tituloForm">Actualizar Pelicula</h2>
+        <span class="close-icon">&times;</span>
+      <form id="actualizarPelicula" enctype="multipart/form-data">
+        
+        <div class="busquedaId">
+          <input type="text" placeholder="Id Pelicula"  id="idActuali"  name="idActuali" />
+          <div class="error-text"></div>
+          <button id="buscarIdActualizar">Buscar</button>
+        </div>
+        <div>
+          <input type="text" placeholder="Titulo" id="tituloActuali" name="tituloActuali" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="date"  placeholder="Fecha Estreno"  id="fechaEstrenoActuali"  name="fechaEstrenoActuali"/>
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Genero" id="generoActuali" name="generoActuali" />
+          <div class="error-text"></div>
+        </div>
+        <!--<div>
+          <input type="text" placeholder="Imagen" id="imagenActuali" name="imagenActuali" />
+          <div class="error-text"></div>
+        </div>-->
+
+
+        <div>
+          <input class="boton" type="submit" value="Actualizar" />
+        </div>
+      </form>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionEliminarPelicula" id="seccionEliminarPelicula">
+        <h2 class="tituloForm">Eliminar Pelicula</h2>
+        <span class="close-icon">&times;</span>
+      <form id="elimPelicula" enctype="multipart/form-data">
+        
+        <div class="busquedaId">
+          <input type="text" placeholder="Id Pelicula" id="idElimPel" name="idElimPel"/>
+          <div class="error-text"></div>
+          <button id="buscarPelElim">Buscar</button>
+        </div>
+        <div>
+          <input type="text" placeholder="Titulo" id="tituloElim" name="tituloElim" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="date" placeholder="Fecha Estreno" id="fechaEstrenoElim" name="fechaEStrenoElim"/>
+          <div class="error-text"></div>
+        </div>
+
+       <!--<div>
+          <input type="text" placeholder="Imagen" id="imagenElim" name="imagenElim" />
+          <div class="error-text"></div>
+        </div>--> 
+        <div>
+          <input type="text" placeholder="Genero" id="generoElim" name="generoElim" />
+          <div class="error-text"></div>
+        </div>
+
+        <div>
+          <input class="boton" type="submit" value="Eliminar" />
+        </div>
+      </form>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionAgregarUsuario"  id="seccionAgregarUsuario">
+        <h2 class="tituloForm">Agregar Usuario</h2>
+        <span class="close-icon">&times;</span>
+      <form id="agregaUsuario" enctype="multipart/form-data">
+       
+        <div>
+          <input type="text" placeholder="Nombre" id="nombreAgreg" name="nombreAgreg" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Apellido" id="apellidoAgreg" name="apellidoAgreg"/>
+          <div class="error-text"></div>
+        </div>
+
+        <div>
+          <input type="email" placeholder="Email" id="emailAgreg" name="emailAgreg" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Usuario" id="usuarioAgreg" name="usuarioAgreg"/>
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="password" placeholder="Contraseña" id="passwordAgreg" name="passwordAgreg"/>
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input class="boton" type="submit" value="Guardar" />
+        </div>
+      </form>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionActualizarUsuario" id="seccionActualizarUsuario">
+        <h2 class="tituloForm">Actualizar Usuario</h2>
+        <span class="close-icon">&times;</span>
+        <form id="actualiUsuario" enctype="multipart/form-data">
+        
+        <div class="busquedaId">
+            <input  type="text" placeholder="Id Usuario" id="idActual"/>
+            <div class="error-text"></div>
+            <button id="buscarUsuActual">Buscar</button>
+          </div>
+        <div>
+          <input type="text" placeholder="Nombre" id="nombreActual" name="nombreActual"/>
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Apellido" id="apellidoActual" name="apellidoActual"/>
+          <div class="error-text"></div>
+        </div>
+
+        <div>
+          <input type="email" placeholder="Email" id="emailActual" name="emailActual" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Rol Id" id="rol_idActual" name="rol_idActual"/>
+          <div class="error-text"></div>
+        </div>
+        
+        <div>
+          <input class="boton" type="submit" value="Actualizar" />
+        </div>
+      </form>
+    </section>
+    <section data-aos="zoom-in" data-aos-duration="1000" class="seccionEliminarUsuario" id="seccionEliminarUsuario">
+        <h2 class="tituloForm">Eliminar Usuario</h2>
+        <span class="close-icon">&times;</span>
+      <form id="elimiUsuario" enctype="multipart/form-data">
+        
+        <div class="busquedaId">
+            <input type="text"  placeholder="Id Usuario" id="idElimUsu" name="idElimUsu"/>
+            <div class="error-text"></div>
+            <button id="buscarUsuElim">Buscar</button>
+          </div>
+        <div>
+          <input type="text" placeholder="Nombre" id="nombreElim" name="nombreElim" />
+          <div class="error-text"></div>
+        </div>
+        <div>
+          <input type="text" placeholder="Apellido" id="apellidoElim" name="apellidoElim"/>
+          <div class="error-text"></div>
+        </div>
+
+        <div>
+          <input type="email" placeholder="Email" id="emailElim" name="emailElim" />
+          <div class="error-text"></div>
+        </div>  
+        <input type="text"  placeholder="Rol Usuario" id="rolElim" name="idElim"/>
+            <div class="error-text"></div>
+            <div></div>
+        
+        <div>
+          <input class="boton" type="submit" value="Eliminar" />
+        </div>
+      </form>
+    </section>
+    
+    <script src="../js/administrar.js"></script>
+  </body>
+</html>
