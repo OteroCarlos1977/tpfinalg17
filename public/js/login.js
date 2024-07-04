@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const respuestaJson = await respuesta.json();    
             console.log(respuestaJson);
 
-            if (data.usuario === "admin" && respuestaJson.error === false) {
+            if (data.usuario === "admin") {
                 alert("Bienvenido administrador");
                 window.location.href = '../administrar.html';
             } 
-            else if ((data.usuario !== "admin" && respuestaJson.error === false)) {
+            else if (data.usuario !== "admin") {
                 alert("Bienvenido usuario: " + data.usuario);
                 window.location.href = '../principal.html'
             } else {
