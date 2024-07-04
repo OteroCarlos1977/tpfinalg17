@@ -14,13 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
             rol_id: 2
         }
 
-        const respuesta = await fetch('/api/usuarios', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
-        });
+        try {
+            const respuesta = await fetch('/api/usuarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
 
         const respuestaJson = await respuesta.json();
         if (respuesta.ok) {
@@ -30,5 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert("Hubo un error al registrar el usuario");
         }
+        } catch (error) {
+        console.error('Error al realizar la solicitud:', error);
+        alert("Hubo un error al realizar la solicitud");
+        }
+
     });
 });
