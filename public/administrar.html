@@ -123,9 +123,9 @@
     
       
       document.addEventListener('DOMContentLoaded', async () => {
-        const API_REST = 'http://localhost:3000/api/'
+        
     try {
-        const respuesta = await fetch(API_REST + 'genero', {
+        const respuesta = await fetch('/api/genero', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
