@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const respuesta = await fetch('http://localhost:3000/api/usuarios', {
+                const respuesta = await fetch('/api/usuarios', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (respuesta.ok) {
                     alert("Usuario Registrado con Éxito");
                     form.reset();
-                    window.location.href = '../index.html';
+                    window.location.href = '/index.js';
                 } else {
                     alert("Hubo un error al registrar el usuario");
                 }
