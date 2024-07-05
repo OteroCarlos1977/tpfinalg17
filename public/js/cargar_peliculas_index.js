@@ -206,7 +206,7 @@ const movies = [{
 {
   "id": 0,
   "titulo": "Battle Over Britain",
-  "ruta_poster": "/uploads/1719714187812.jpg",
+  "ruta_poster": "/uploads/1719714224413.jpg",
   "fecha_estreno": "2023-12-01",
   "genero": "Bélico"
 },
