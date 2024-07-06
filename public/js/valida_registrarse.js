@@ -6,18 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
         email: 'El correo electrónico no es válido',
         usuario: 'El usuario es obligatorio',
         password: 'La contraseña es obligatoria'
-        
     };
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
 
         if (validateForm()) {
             console.log('El formulario es válido. Enviar datos...');
 
             const formData = new FormData(form);
             const data = {
-                id:0,
+                id: 0,
                 nombre: formData.get('nombre'),
                 apellido: formData.get('apellido'),
                 email: formData.get('email'),
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = '../index.html';
                 } else {
                     alert("Hubo un error al registrar el usuario");
-                };
+                }
 
             } catch (error) {
                 console.error('Error:', error);
@@ -57,17 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const validateForm = () => {
-        let isValid = true;
+        let esValido = true;
 
         for (const [fieldId, errorMessage] of Object.entries(fields)) {
             if (fieldId === 'email') {
-                isValid = validateEmailField(fieldId, errorMessage) && isValid;
+                esValido = validateEmailField(fieldId, errorMessage) && esValido;
             } else {
-                isValid = validateField(fieldId, errorMessage) && isValid;
+                esValido = validateField(fieldId, errorMessage) && esValido;
             }
         }
 
-        return isValid;
+        return esValido;
     };
 
     const validateField = (fieldId, errorMessage) => {
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-   
     const setErrorFor = (input, message) => {
         const formControl = input.closest('div');
         const errorText = formControl.querySelector('.error-text');
@@ -135,5 +133,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
 });
