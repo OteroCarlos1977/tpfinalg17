@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '../administrar.html';
         } 
         else if (data.usuario !== "admin") {
-            alert("Bienvenido usuario: " + data.usuario);
+            alert("Bienvenido: " + data.usuario);
             window.location.href = '../principal.html'
         } else {
             alert("Usuario o contraseña incorrectos");

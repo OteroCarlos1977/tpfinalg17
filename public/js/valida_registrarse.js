@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Previene el envío por defecto del formulario
+        event.preventDefault(); 
 
         if (validateForm()) {
             console.log('El formulario es válido. Enviar datos...');
+
             const formData = new FormData(form);
             const data = {
                 id:0,
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const respuesta = await fetch('/api/usuarios', {
+                const respuesta = await fetch(`${window.location.origin}/api/usuarios`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -35,13 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const respuestaJson = await respuesta.json();
+                console.log(respuesta);
+                console.log(respuestaJson);
+
                 if (respuesta.ok) {
                     alert("Usuario Registrado con Éxito");
                     form.reset();
-                    window.location.href = '/index.js';
+                    window.location.href = '../index.html';
                 } else {
                     alert("Hubo un error al registrar el usuario");
-                }
+                };
+
             } catch (error) {
                 console.error('Error:', error);
                 alert("Hubo un error al registrar el usuario");
@@ -57,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const [fieldId, errorMessage] of Object.entries(fields)) {
             if (fieldId === 'email') {
                 isValid = validateEmailField(fieldId, errorMessage) && isValid;
-            } else if (fieldId === 'terminos') {
-                isValid = validateCheckboxField(fieldId, errorMessage) && isValid;
             } else {
                 isValid = validateField(fieldId, errorMessage) && isValid;
             }
@@ -94,17 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const validateCheckboxField = (fieldId, errorMessage) => {
-        const field = document.getElementById(fieldId);
-        if (!field.checked) {
-            setErrorFor(field, errorMessage);
-            return false;
-        } else {
-            setSuccessFor(field);
-            return true;
-        }
-    };
-
+   
     const setErrorFor = (input, message) => {
         const formControl = input.closest('div');
         const errorText = formControl.querySelector('.error-text');
@@ -142,12 +135,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    form.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                setSuccessFor(checkbox);
-            }
-        });
-    });
+    
 });
