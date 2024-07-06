@@ -333,5 +333,23 @@ mostrarPeliculasAclamadas();
 
 mostrarPeliculasTendencia();
 
+document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+  event.preventDefault(); // Previene el comportamiento por defecto del enlace
+
+  // Limpiar el cache (esto puede ser limitado según el navegador)
+  if ('caches' in window) {
+      caches.keys().then(function(keyList) {
+          return Promise.all(keyList.map(function(key) {
+              return caches.delete(key);
+          }));
+      });
+  }
+
+  // Borrar el localStorage
+  localStorage.clear();
+
+  // Redirigir a la página de inicio de sesión
+  window.location.href = '../index.html';
+});
  
 });

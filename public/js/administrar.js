@@ -104,6 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
         seccElimPeli.style.display = 'block';
     });
 
+    btnCerrarSesion.addEventListener('click', function(event) {
+        event.preventDefault(); 
+      
+        
+        if ('caches' in window) {
+            caches.keys().then(function(keyList) {
+                return Promise.all(keyList.map(function(key) {
+                    return caches.delete(key);
+                }));
+            });
+        }
+      
+        localStorage.clear();
+      
+        window.location.href = '../index.html';
+      });
+
 /* **************************************************************************
                 FUNCION PARA CERRAR LAS DISTINTAS SECCIONES
 ************************************************************************** */
