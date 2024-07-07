@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         password: dataForm.get("password")
       };
 
-      if (data.usaurio === 'admin'){
+      if (data.usuario === 'admin'){
         alert('Bienvenido administrador');
         window.location.href = '../administrar.html';
         } else {
