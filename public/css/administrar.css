@@ -102,6 +102,7 @@ body {
           transition: transform 0.3s, box-shadow 0.3s;
           &:hover {
             background-color: #9f3647;
+            cursor: pointer;
           }
         }
       }

@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Selecciona el formulario en el DOM
   const form = document.getElementById("loginForm");
 
-  // Agrega un evento de escucha para cuando se envía el formulario
   form.addEventListener("submit", async (event) => {
-    // Evita que el formulario se envíe
     event.preventDefault();
 
     if (validateForm()) {
@@ -26,29 +24,37 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(data),
         });
 
-        const respuestaJson = await respuesta.json();
-        console.log(respuesta);
-        console.log(respuestaJson);
+        const login = await respuesta.json();
+        console.log(login);
 
-        if (data.usuario === "admin") {
-          alert("Bienvenido administrador");
-          window.location.href = "../administrar.html";
-        } else if (data.usuario !== "admin") {
-          alert("Bienvenido usuario: " + data.usuario);
-          window.location.href = "../principal.html";
+        if (!login.error && login.status === 200) {
+          handleLoginSuccess(data.usuario);
         } else {
-          alert("Usuario o contraseña incorrectos");
+          handleLoginFailure(login.body);
         }
       } catch (error) {
         console.error("Error al realizar la solicitud:", error);
         alert("Hubo un error al realizar la solicitud");
       }
     } else {
-      console.log(
-        "El formulario no es válido. Por favor, corrige los errores."
-      );
+      console.log("El formulario no es válido. Por favor, corrige los errores.");
     }
   });
+
+  function handleLoginSuccess(usuario) {
+    if (usuario === "admin") {
+      alert("Bienvenido administrador");
+      window.location.href = "../administrar.html";
+    } else {
+      alert("Bienvenido usuario: " + usuario);
+      window.location.href = "../principal.html";
+    }
+  }
+
+  function handleLoginFailure(message) {
+    alert("Error de inicio de sesión: " + message);
+  }
+
 
   // Función para validar todo el formulario
   const validateForm = () => {
