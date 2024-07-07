@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const dataForm = new FormData(form);
       const data = {
         usuario: dataForm.get("usuario"),
-        password: dataForm.get("password"),
+        password: dataForm.get("password")
       };
+
+      
 
       try {
         const respuesta = await fetch(`${window.location.origin}/api/auth/login`, {

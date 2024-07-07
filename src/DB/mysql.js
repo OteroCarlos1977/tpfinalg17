@@ -68,10 +68,19 @@ function eliminar(tabla, data){
     });
 }
 
-function query(tabla, consulta){
-    return new Promise((resolve, reject)=>{
-        conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta ,(error, result)=>{
-            return error ? reject(error) : resolve(result[0]);
+function query(tabla, consulta) {
+    return new Promise((resolve, reject) => {
+        conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta, (error, result) => {
+            if (error) {
+                console.error("Error en la consulta a la base de datos:", error);
+                return reject(error);
+            }
+            if (!result || result.length === 0) {
+                console.log("Usuario no encontrado en la base de datos");
+                return resolve(null);
+            }
+            console.log("Resultado de la consulta:", result[0]);
+            return resolve(result[0]);
         });
     });
 }
