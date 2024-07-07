@@ -1,87 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- const aclamadas =   [
-        {
-          "titulo": "Sueño de Fuga",
-          "imagen": "/img/aclamada_1.jpg"
-        },
-        {
-          "titulo": "El Padrino",
-          "imagen": "/img/aclamada_2.jpg"
-        },
-        {
-          "titulo": "El Padrino: Parte II",
-          "imagen": "/img/aclamada_3.jpg"
-        },
-        {
-          "titulo": "La Lista de Schindler",
-          "imagen": "/img/aclamada_4.jpg"
-        },
-        {
-          "titulo": "12 Hombres en Pugna",
-          "imagen": "/img/aclamada_5.jpg"
-        },
-        {
-          "titulo": "Dilwale Dulhania Le Jayenge",
-          "imagen": "/img/aclamada_6.jpg"
-        },
-        {
-          "titulo": "El Viaje de Chihiro",
-          "imagen": "/img/aclamada_7.jpg"
-        },
-        {
-          "titulo": "El Caballero de la Noche",
-          "imagen": "/img/aclamada_8.jpg"
-        },
-        {
-          "titulo": "Parásitos",
-          "imagen": "/img/aclamada_9.jpg"
-        },
-        {
-          "titulo": "The Green Mile",
-          "imagen": "/img/aclamada_10.jpg"
-        },
-        {
-          "titulo": "Tu Nombre.",
-          "imagen": "/img/aclamada_11.jpg"
-        },
-        {
-          "titulo": "Pulp Fiction",
-          "imagen": "/img/aclamada_12.jpg"
-        },
-        {
-          "titulo": "El Señor de los Anillos: El Retorno del Rey",
-          "imagen": "/img/aclamada_13.jpg"
-        },
-        {
-          "titulo": "Forrest Gump",
-          "imagen": "/img/aclamada_14.jpg"
-        },
-        {
-          "titulo": "El Bueno, el Malo y el Feo",
-          "imagen": "/img/aclamada_15.jpg"
-        },
-        {
-          "titulo": "Buenos Muchachos",
-          "imagen": "/img/aclamada_16.jpg"
-        },
-        {
-          "titulo": "La Tumba de las Luciérnagas",
-          "imagen": "/img/aclamada_17.jpg"
-        },
-        {
-          "titulo": "Los Siete Samuráis",
-          "imagen": "/img/aclamada_18.jpg"
-        },
-        {
-          "titulo": "Cinema Paradiso",
-          "imagen": "/img/aclamada_19.jpg"
-        },
-        {
-          "titulo": "La Vida es Bella",
-          "imagen": "/img/aclamada_20.jpg"
-        }
-      ] 
+ 
 
 const movies = [{
   "id": 0,
@@ -309,24 +228,45 @@ const mostrarPeliculasTendencia = async () => {
 };*/
 
 const mostrarPeliculasAclamadas = async () => {
-   // const movies = await cargarPeliculasAclamadas();
-    const aclamadasContainer = document.querySelector('.peliculasAclamadas .aclamadas'); 
-    aclamadasContainer.innerHTML = ''; 
-
-    aclamadas.forEach(aclamada => {
-        // creo el div peliculaItem
-        const peliculaItem = document.createElement('div');
-        peliculaItem.classList.add('peliculaItem');
-        // creo la imagen
-        const img = document.createElement('img');
-        img.classList.add('imgAclamada');
-        img.src = aclamada.imagen;
-        img.alt = aclamada.titulo;
-        img.loading = 'lazy';
-        // relaciono los elementos
-        peliculaItem.appendChild(img);
-        aclamadasContainer.appendChild(peliculaItem);
-    });
+  try {
+      // Hacer el fetch a la URL
+      const response = await fetch('/api/aclamadas');
+      
+      // Verificar si la respuesta es exitosa
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      
+       // Convertir la respuesta a JSON
+       const data = await response.json();
+        
+       // Acceder a las peliculas aclamadas en el body
+       const aclamadas = data.body; 
+      
+      // Seleccionar el contenedor
+      const aclamadasContainer = document.querySelector('.peliculasAclamadas .aclamadas'); 
+      aclamadasContainer.innerHTML = ''; 
+      
+      // Iterar sobre las peliculas aclamadas y crear los elementos
+      aclamadas.forEach(aclamada => {
+          // Crear el div peliculaItem
+          const peliculaItem = document.createElement('div');
+          peliculaItem.classList.add('peliculaItem');
+          
+          // Crear la imagen
+          const img = document.createElement('img');
+          img.classList.add('imgAclamada');
+          img.src = aclamada.imagen;
+          img.alt = aclamada.titulo;
+          img.loading = 'lazy';
+          
+          // Relacionar los elementos
+          peliculaItem.appendChild(img);
+          aclamadasContainer.appendChild(peliculaItem);
+      });
+  } catch (error) {
+      console.error('Error fetching the acclaimed movies:', error);
+  }
 };
 
 mostrarPeliculasAclamadas();
