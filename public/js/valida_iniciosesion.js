@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       }*/
 
-      //Comento este fragmento porque no podemos solucionar que en produccion no genere errores de autenticación 
+      
       
       try {
         const respuesta = await fetch('/api/auth/login', {
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Bienvenido administrador");
       window.location.href = "../administrar.html";
     } else {
-      alert("Bienvenido usuario: " + usuario);
+      alert("Bienvenido: " + usuario);
       window.location.href = "../principal.html";
     }
   }
