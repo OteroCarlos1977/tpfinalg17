@@ -4,7 +4,7 @@ const controlador = require("./index");
 const router = express.Router();
 
   
-router.post('/login', login);
+router.post('/login', cors(options), login);
 router.get('/', todos);
 router.get('/:id', uno);
 

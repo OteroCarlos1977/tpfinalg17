@@ -15,16 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
         password: dataForm.get("password")
       };
 
-      if (data.usuario === 'admin'){
+      /*if (data.usuario === 'admin' && data.password === 'admin') {
         alert('Bienvenido administrador');
         window.location.href = '../administrar.html';
-        } else {
+        } else 
+        
+        if (data.usuario === 'usuario' && data.password==='usuario'){
         alert('Bienvenido'+ data.usuario);
         window.location.href = '../principal.html';
-      }
+      } else {
+
+      }*/
 
       //Comento este fragmento porque no podemos solucionar que en produccion no genere errores de autenticación 
-      /*
+      
       try {
         const respuesta = await fetch('/api/auth/login', {
           method: "POST",
@@ -45,10 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         console.error("Error al realizar la solicitud:", error);
         alert("Hubo un error al realizar la solicitud");
-      }*/
-    } /*else {
+      }
+    } else {
       console.log("El formulario no es válido. Por favor, corrige los errores.");
-    }*/
+    }
   });
 
   function handleLoginSuccess(usuario) {
