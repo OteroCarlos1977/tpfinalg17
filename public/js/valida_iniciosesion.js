@@ -15,6 +15,47 @@ document.addEventListener("DOMContentLoaded", () => {
         password: dataForm.get("password")
       };
 
+      try {
+        const response = await fetch('/api/auth/');
+        
+        if (!response.ok) {
+          throw new Error('Respuesta de la red negativa');
+        }
+
+        const dataUser = await response.json();
+
+        if (!Array.isArray(dataUser.body)) {
+          throw new Error('Se esperaba que data.body fuera un array pero se obtuvo ' + typeof data.body);
+        }
+
+        const usuarios = dataUser.body;
+        console.log(usuarios);
+        const usuarioEncontrado = usuarios.find(user => user.usuario === data.usuario);
+
+        if (usuarioEncontrado) {
+          if (data.usuario === 'admin' && data.password === 'admin') {
+            alert("Bienvenido administrador");
+            window.location.href = 'administrar.html';
+          } else if (data.usuario === 'usuario' && data.password === 'usuario') {
+            alert("Bienvenido: " + data.usuario);
+            window.location.href = 'principal.html';
+          } else {
+            alert("Bienvenido: " + data.usuario);
+            window.location.href = 'principal.html';
+          }
+        } else {
+          alert("Usuario o contraseña incorrectos");
+        }
+        
+      } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        alert("Hubo un error al realizar la solicitud");
+      }
+    } else {
+      console.log("El formulario no es válido. Por favor, corrige los errores.");
+    }
+  });
+/*
       if (data.usuario === 'admin' && data.password === 'admin') {
         alert('Bienvenido administrador');
         window.location.href = '../administrar.html';
@@ -26,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         alert('Algunos de los datos ingresados no es correcto');
 
-      }
+      }*/
 
       
       //Comentamos esto porque esta fallando al ingresar
@@ -50,13 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
       /*} catch (error) {
         console.error("Error al realizar la solicitud:", error);
         alert("Hubo un error al realizar la solicitud");
-      }*/
-    } /*else {
+      }
+    } else {
       console.log("El formulario no es válido. Por favor, corrige los errores.");
     }*/
-  });
+  
 
-  function handleLoginSuccess(usuario) {
+  /*function handleLoginSuccess(usuario) {
     if (usuario === "admin") {
       alert("Bienvenido administrador");
       window.location.href = "../administrar.html";
@@ -69,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleLoginFailure(message) {
     alert("Error de inicio de sesión: " + message);
   }
-
+    */
 
   // Función para validar todo el formulario
   const validateForm = () => {
@@ -129,4 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
 });
+   
