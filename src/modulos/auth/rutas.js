@@ -3,8 +3,9 @@ const respuesta = require("../../red/respuestas");
 const controlador = require("./index");
 const router = express.Router();
 
+
   
-router.post('/login', cors(options), login);
+router.post('/login',  login);
 router.get('/', todos);
 router.get('/:id', uno);
 
