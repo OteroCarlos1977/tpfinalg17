@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         password: dataForm.get("password")
       };
 
+      //Utilizaremos esta evaluacion que no es del todo correcta solo para darle funcionalidad
       try {
         const response = await fetch('/api/auth/');
         
