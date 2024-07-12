@@ -15,44 +15,45 @@ document.addEventListener("DOMContentLoaded", () => {
         password: dataForm.get("password")
       };
 
-      /*if (data.usuario === 'admin' && data.password === 'admin') {
+      if (data.usuario === 'admin' && data.password === 'admin') {
         alert('Bienvenido administrador');
         window.location.href = '../administrar.html';
         } else 
         
-        if (data.usuario === 'usuario' && data.password==='usuario'){
+        if (data.usuario !== 'admin' && data.password !=='usuario'){
         alert('Bienvenido'+ data.usuario);
         window.location.href = '../principal.html';
       } else {
+        alert('Algunos de los datos ingresados no es correcto');
 
-      }*/
+      }
 
       
-      
-      try {
+      //Comentamos esto porque esta fallando al ingresar
+      /*try {
         const respuesta = await fetch('/api/auth/login', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        });
+        });*/
 
-        const login = await respuesta.json();
-        console.log(login);
+        /*const login = await respuesta.json();
+        console.log(login);*/
 
-        if (!login.error && login.status === 200) {
+       /* if (!login.error && login.status === 200) {
           handleLoginSuccess(data.usuario);
         } else {
           handleLoginFailure(login.body);
-        }
-      } catch (error) {
+        }/*
+      /*} catch (error) {
         console.error("Error al realizar la solicitud:", error);
         alert("Hubo un error al realizar la solicitud");
-      }
-    } else {
+      }*/
+    } /*else {
       console.log("El formulario no es válido. Por favor, corrige los errores.");
-    }
+    }*/
   });
 
   function handleLoginSuccess(usuario) {
