@@ -1,24 +1,30 @@
 {
   "name": "grupo17_fullstack",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicacion full stack para catalogo y administracion de peliculas.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "mysql",
+    "movies",
+    "crud"
+  ],
+  "author": "Carlos Octavio Otero",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.10.2",
-    "nodemon": "^3.1.4"
+    "mysql2": "^3.10.2"
   },
   "devDependencies": {
-    "dotenv": "^16.4.5"
+    "nodemon": "^3.1.4"
   }
 }
