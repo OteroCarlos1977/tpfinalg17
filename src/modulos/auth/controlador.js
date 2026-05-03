@@ -1,7 +1,7 @@
 
 
 const TABLA = 'auth';
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const auth = require('../../auth');
 
 module.exports = function(dbInyectada){
@@ -14,26 +14,20 @@ module.exports = function(dbInyectada){
 
     async function login(usuario, password) {
         try {
-            console.log("Inicio de sesión:", { usuario, password });
             const data = await db.query(TABLA, { usuario: usuario });
     
             if (!data) {
                 throw new Error('Usuario no encontrado');
             }
     
-            console.log("Datos del usuario:", data);
-    
             const resultado = await bcrypt.compare(password, data.password);
     
             if (resultado === true) {
-                console.log("Contraseña correcta, generando token");
                 return auth.asignarToken({ ...data });
             } else {
-                console.log("Contraseña incorrecta");
                 throw new Error('Información Inválida');
             }
         } catch (error) {
-            console.error("Error en la función login:", error.message);
             throw error;
         }
     }
@@ -59,11 +53,18 @@ module.exports = function(dbInyectada){
     }
 
     async function todos(){
-        return db.todos(TABLA);
+        const items = await db.todos(TABLA);
+        return items.map(({ password, ...item }) => item);
     }
 
     async function uno(id){
-        return db.uno(TABLA, id);
+        const items = await db.uno(TABLA, id);
+        if (!items || items.length === 0) {
+            return null;
+        }
+
+        const { password, ...item } = items[0];
+        return item;
     }
 
 

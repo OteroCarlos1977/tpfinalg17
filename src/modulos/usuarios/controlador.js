@@ -34,20 +34,17 @@ module.exports = function(dbInyectada){
     }
 
     async function uno(id){
-        const usuarioData = await db.uno(TABLA, id);
+        const usuarios = await db.uno(TABLA, id);
+        const usuarioData = usuarios[0];
         const authData = await auth.uno(id);
-
-        console.log("Usuario Data:", usuarioData); // <-- Aquí
-        console.log("Auth Data for ID:", id, authData); // <-- Aquí
 
         // Combinando los datos de ambas tablas
         const combinedData = {
             ...usuarioData,
-            usuario: authData.usuario,
-            password: authData.password
+            usuario: authData?.usuario
         };
 
-        return combinedData;
+        return [combinedData];
     }
 
     
