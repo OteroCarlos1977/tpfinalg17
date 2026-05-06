@@ -558,7 +558,6 @@ actualizarUsuario.addEventListener('submit', async (event) => {
     
             const respuestaJson = await respuesta.json();
             if (respuesta.ok) {
-                console.log("Película agregada con éxito:", respuestaJson);
                 alert("Película agregada con éxito");
                 nuevaPelicula.reset();
                 seccAgregPeli.style.display = 'none';
@@ -688,7 +687,6 @@ idActualizar.addEventListener('click', async (event) => {
         }
 
         const pelData = await response.json();
-        console.log(pelData); 
         
         
         // Validar la estructura de userData.body

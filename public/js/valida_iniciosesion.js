@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     if (validateForm()) {
-      console.log("El formulario es válido. Enviar Datos.");
-
       const dataForm = new FormData(form);
       const data = {
         usuario: dataForm.get("usuario"),
@@ -30,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const usuarios = dataUser.body;
-        console.log(usuarios);
         const usuarioEncontrado = usuarios.find(user => user.usuario === data.usuario);
 
         if (usuarioEncontrado) {
@@ -53,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Hubo un error al realizar la solicitud");
       }
     } else {
-      console.log("El formulario no es válido. Por favor, corrige los errores.");
+      return;
     }
   });
 /*

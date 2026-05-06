@@ -1,10 +1,11 @@
 const multer = require('multer');
 const path = require('path');
 
-// Multer configuracion para subir archivos
+const uploadDir = path.join(__dirname, '../../../public/uploads');
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../../../../frontend/public/uploads')); 
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
         cb(null,  Date.now() + path.extname(file.originalname));
@@ -25,7 +26,7 @@ const upload = multer({ storage: storage,
         return cb(new Error('Error: tipo de archivo no permitido'), false);
     },
     limits: 
-    { fileSize: 1024 * 1024 * 5 } // 5MB maximo para el archivo subido
+    { fileSize: 1024 * 1024 * 5 }
  });
 
 

@@ -14,20 +14,18 @@ module.exports = function(dbInyectada){
     }
 
     async function todos() {
-        const usuariosData = await db.todos(TABLA); // Obtener datos de la tabla 'usuarios'
-        const authData = await auth.todos(); // Obtener datos de autenticación
+        const usuariosData = await db.todos(TABLA);
+        const authData = await auth.todos();
     
-        // Mapear los datos de autenticación por id
         const authMap = authData.reduce((map, authEntry) => {
             map[authEntry.id] = authEntry;
             return map;
         }, {});
     
-        // Combinar los datos de ambas tablas
         const combinedData = usuariosData.map(usuario => ({
             ...usuario,
-            usuario: authMap[usuario.id]?.usuario, // Agregar el campo 'usuario' desde authData
-            password: authMap[usuario.id]?.password // Agregar el campo 'password' desde authData
+            usuario: authMap[usuario.id]?.usuario,
+            password: authMap[usuario.id]?.password
         }));
     
         return combinedData;
@@ -38,7 +36,6 @@ module.exports = function(dbInyectada){
         const usuarioData = usuarios[0];
         const authData = await auth.uno(id);
 
-        // Combinando los datos de ambas tablas
         const combinedData = {
             ...usuarioData,
             usuario: authData?.usuario
@@ -52,15 +49,12 @@ module.exports = function(dbInyectada){
     async function eliminar(body) {
         const userId = body.id;
     
-        // Eliminar el registro de la tabla 'auth'
         const respuestaAuth = await auth.eliminar({
             id: userId
         });
     
-        // Eliminar el registro de la tabla 'usuarios'
         const respuestaUsuario = await db.eliminar(TABLA, body);
     
-        // Retornar alguna respuesta, por ejemplo, confirmación de eliminación
         return {
             auth: respuestaAuth,
             usuario: respuestaUsuario

@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         if (validateForm()) {
-            console.log('El formulario es válido. Enviar datos...');
-
             const formData = new FormData(form);
             const data = {
                 id: 0,
@@ -34,10 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(data),
                 });
 
-                const respuestaJson = await respuesta.json();
-                console.log(respuesta);
-                console.log(respuestaJson);
-
                 if (respuesta.ok) {
                     alert("Usuario Registrado con Éxito");
                     form.reset();
@@ -51,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Hubo un error al registrar el usuario");
             }
         } else {
-            console.log('El formulario no es válido. Por favor, corrige los errores.');
+            return;
         }
     });
 
