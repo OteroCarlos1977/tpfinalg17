@@ -1,13 +1,14 @@
 
 
 const TABLA = 'usuarios';
-const auth = require('../auth');
+const authDefault = require('../auth');
 
 
 
-module.exports = function(dbInyectada){
+module.exports = function(dbInyectada, authInyectada){
 
     let db = dbInyectada;
+    const auth = authInyectada || authDefault;
 
     if (!db){
         db = require('../../DB/mysql');

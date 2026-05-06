@@ -70,7 +70,7 @@ node -e "require('./index'); console.log('app carga correctamente')"
 
 Estas validaciones confirman tests basicos, sintaxis y carga de la aplicacion Express.
 
-Los tests actuales cubren login con password hasheada, rechazo de credenciales invalidas, creacion/verificacion de token JWT, formato uniforme de respuestas y manejo de errores basicos.
+Los tests actuales cubren login con password hasheada, rechazo de credenciales invalidas, creacion/verificacion de token JWT, formato uniforme de respuestas, manejo de errores basicos, controladores CRUD principales y composicion de usuarios con credenciales.
 
 ## Usuarios Demo
 
@@ -134,6 +134,6 @@ public/
 
 ## Mejoras Recomendadas
 
-- Ampliar tests de API para peliculas, usuarios, generos y roles.
+- Ampliar tests de rutas HTTP para peliculas, usuarios, generos y roles.
 - Documentar endpoints principales con ejemplos de request y response.
 - Migrar a una base administrada si se busca persistencia real en deploy.
