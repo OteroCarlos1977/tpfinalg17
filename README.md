@@ -62,12 +62,15 @@ npm start
 ## Validacion
 
 ```bash
+npm test
 node --check index.js
 node --check src/app.js
 node -e "require('./index'); console.log('app carga correctamente')"
 ```
 
-Estas validaciones confirman sintaxis basica y carga de la aplicacion Express. Para una mejora posterior conviene sumar tests automatizados de endpoints y autenticacion.
+Estas validaciones confirman tests basicos, sintaxis y carga de la aplicacion Express.
+
+Los tests actuales cubren login con password hasheada, rechazo de credenciales invalidas, creacion/verificacion de token JWT, formato uniforme de respuestas y manejo de errores basicos.
 
 ## Usuarios Demo
 
@@ -131,6 +134,6 @@ public/
 
 ## Mejoras Recomendadas
 
-- Agregar tests de API para login, peliculas, usuarios, generos y roles.
+- Ampliar tests de API para peliculas, usuarios, generos y roles.
 - Documentar endpoints principales con ejemplos de request y response.
 - Migrar a una base administrada si se busca persistencia real en deploy.
