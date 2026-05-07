@@ -131,9 +131,3 @@ public/
 - Las contrasenas demo estan hasheadas en la base inicial.
 - Las credenciales publicadas son solo para presentacion.
 - La demo academica no reemplaza controles productivos como rate limiting, refresh tokens o auditoria.
-
-## Mejoras Recomendadas
-
-- Ampliar tests de rutas HTTP para peliculas, usuarios, generos y roles.
-- Documentar endpoints principales con ejemplos de request y response.
-- Migrar a una base administrada si se busca persistencia real en deploy.
