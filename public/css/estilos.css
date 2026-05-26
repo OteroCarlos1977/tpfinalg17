@@ -497,6 +497,27 @@ body{
         color: white;
         cursor: pointer;
     }
+    .developerFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 0;
+        color: #f4d7dc;
+        font-weight: 700;
+    }
+    .developerFooterLogo {
+        width: 30px;
+        height: 30px;
+        display: inline-grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 8px;
+        color: #ffffff;
+        background: #181419;
+        font-size: 12px;
+        font-weight: 900;
+    }
     .aportes,.video{
         font-size: 14px;
     }

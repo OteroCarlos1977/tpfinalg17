@@ -17,6 +17,31 @@ body{
     color:white; 
 }
 
+.developerFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    color: #f4d7dc;
+    background: #181419;
+    border-top: 1px solid rgba(159, 54, 71, 0.42);
+    font-weight: 700;
+}
+
+.developerFooterLogo {
+    width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 8px;
+    color: #ffffff;
+    background: #9f3647;
+    font-size: 12px;
+    font-weight: 900;
+}
+
 /*ESTILOS HEADER PARA ESCRITORIO*/
 .header{
     background-color:#9f3647;
